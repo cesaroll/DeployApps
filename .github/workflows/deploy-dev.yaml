@@ -35,12 +35,12 @@ jobs:
       id: vars
       run: |
         calculatedSHA=$(git rev-parse --short ${{ github.sha }})
-        echo "short-SHA=${calculatedSHA}" >> $GITHUB_OUTPUT
+        echo "short_sha=${calculatedSHA}" >> $GITHUB_OUTPUT
 
     - name: 🏗️ Build and push Docker image to ACR
       env:
         ACR_REGISTRY: ${{ vars.ACR_SERVER }}
-        IMAGE_TAG: ${{ steps.vars.outputs.short-SHA }}
+        IMAGE_TAG: ${{ steps.vars.outputs.short_sha }}
       run: |
         docker build -f docker/Dockerfile -t $ACR_REGISTRY/f1app:$IMAGE_TAG -t $ACR_REGISTRY/f1app:latest .
         docker push $ACR_REGISTRY/f1app:$IMAGE_TAG
@@ -64,7 +64,7 @@ jobs:
         ACR_SERVER: ${{ vars.ACR_SERVER }}
       with:
         registryUrl: ${{ vars.ACR_SERVER }}
-        imageToDeploy: ${{ vars.ACR_SERVER }}/f1app:$IMAGE_TAG
+        imageToDeploy: ${{ vars.ACR_SERVER }}/f1app:latest
         targetPort: 8080
         ingress: external
         containerAppName: f1-app
