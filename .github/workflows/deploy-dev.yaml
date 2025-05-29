@@ -10,8 +10,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/dotnet/sdk:9.0
+    # container:
+    #   image: mcr.microsoft.com/dotnet/sdk:9.0
     outputs:
       short-SHA: ${{ steps.vars.outputs.short_sha }}
     steps:
@@ -22,10 +22,10 @@ jobs:
     - name: 🛡️ Mark repo as safe for Git
       run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-    # - name: ⚙️ Set up dotnet
-    #   uses: actions/setup-dotnet@v2
-    #   with:
-    #     dotnet-version: '9.0.x'
+    - name: ⚙️ Set up dotnet
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '9.0.x'
 
     - name: 🐳 Configure Azure ACR
       uses: azure/docker-login@v2
