@@ -32,5 +32,7 @@ jobs:
       id: vars
       run: |
         calculatedSHA=$(git rev-parse --short ${{ github.sha }})
-        echo "::set-output name=calculatedSHA::${calculatedSHA}"
+        echo "calculatedSHA=${calculatedSHA}" >> $GITHUB_OUTPUT
+
+
 
