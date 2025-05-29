@@ -10,22 +10,19 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    # container:
-    #   image: mcr.microsoft.com/dotnet/sdk:9.0
-    outputs:
-      short-SHA: ${{ steps.vars.outputs.short_sha }}
+
     steps:
     - name: 📥 Checkout repository
       id: github
       uses: actions/checkout@v3
 
-    - name: 🛡️ Mark repo as safe for Git
-      run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
     - name: ⚙️ Set up dotnet
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '9.0.x'
+
+    # - name: 🛡️ Mark repo as safe for Git
+    #   run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
     - name: 🐳 Configure Azure ACR
       uses: azure/docker-login@v2
@@ -46,10 +43,4 @@ jobs:
         IMAGE_TAG: ${{ steps.vars.outputs.short-SHA }}
       run: |
         docker build -f docker/Dockerfile -t $ACR_REGISTRY/f1app:$IMAGE_TAG -t $ACR_REGISTRY/f1app:latest .
-        docker push $ACR_REGISTRY/f1app:$IMAGE_TAG
-        docker push $ACR_REGISTRY/f1app:latest
-
-
-
-
-
+        docker push $ACR_REGISTRY/f1app --all-tags
