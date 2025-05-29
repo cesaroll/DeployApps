@@ -1,5 +1,5 @@
 resource "azurerm_container_app" "ca" {
-  name                = "f1-api-ca-${var.env_id}"
+  name                = "f1-app-${var.env_id}"
   resource_group_name = azurerm_resource_group.f1rg.name
   container_app_environment_id = azurerm_container_app_environment.cae.id
 
