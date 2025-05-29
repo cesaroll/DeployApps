@@ -67,7 +67,7 @@ jobs:
         imageToDEploy: ${{ vars.ACR_SERVER }}/f1app:$IMAGE_TAG
         targetPort: 8080
         ingress: external
-        containerAppName: f1app
+        containerAppName: f1-api-ca-dev
         containerAppEnvironment: cesf1caedev
         resourceGroup: ces-f1-rg-dev
         environmentVariables: |
