@@ -57,7 +57,7 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: List Container Apps
+    - name: 📋 List Container Apps
       run: az containerapp list -g ces-f1-rg-dev --output table
 
     - name: 🚀 Deploy to ACR
@@ -70,8 +70,8 @@ jobs:
         imageToDeploy: ${{ vars.ACR_SERVER }}/f1app:$IMAGE_TAG
         targetPort: 8080
         ingress: external
-        containerAppName: f1-ca
-        containerAppEnvironment: cesf1cae
+        containerAppName: f1-app-dev
+        containerAppEnvironment: cesf1caedev
         resourceGroup: ces-f1-rg-dev
         environmentVariables: |
           ASPNETCORE_ENVIRONMENT=Development ASPNETCORE_URLS=http://+:8080

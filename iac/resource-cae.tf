@@ -1,5 +1,5 @@
 resource "azurerm_container_app_environment" "cae" {
-  name                = "cesf1cae"
+  name                = "cesf1cae${var.env_id}"
   location            = azurerm_resource_group.f1rg.location
   resource_group_name = azurerm_resource_group.f1rg.name
 
