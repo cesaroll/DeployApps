@@ -22,10 +22,10 @@ variable "env_id" {
   default     = "dev"
 }
 
-variable "sql_admin_password" {
-  type        = string
-  description = "The SQL DB admin password"
-}
+# variable "sql_admin_password" {
+#   type        = string
+#   description = "The SQL DB admin password"
+# }
 
 
 
